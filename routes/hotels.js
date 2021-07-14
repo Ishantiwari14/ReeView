@@ -22,6 +22,10 @@ router.get('/', catchAsync(async (req, res) => {
 }))
 
 router.get('/new', (req, res) => {
+    if (!req.isAuthenticated()) {
+        req.flash('error', 'You need to be signed in!!')
+        return res.redirect('/login');
+    }
     res.render('hotels/new')
 })
 
